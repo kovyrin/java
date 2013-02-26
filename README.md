@@ -53,8 +53,8 @@ Attributes
 
 See `attributes/default.rb` for default values.
 
-* `node["java"]["install_flavor"]` - Flavor of JVM you would like installed (`oracle` or
-`openjdk`), default `openjdk`.
+* `node["java"]["install_flavor"]` - Flavor of JVM you would like installed (`oracle`,
+`openjdk` or `package`), default `openjdk`.
 * `node['java']['java_home']` - Default location of the "`$JAVA_HOME`".
 * `node['java']['tarball']` - Name of the tarball to retrieve from your corporate
 repository default `jdk1.6.0_29_i386.tar.gz`
@@ -78,7 +78,7 @@ default
 
 Include the default recipe in a run list, to get `java`.  By default
 the `openjdk` flavor of Java is installed, but this can be changed by
-using the `install_flavor` attribute. If the platform is windows it 
+using the `install_flavor` attribute. If the platform is windows it
 will include the windows recipe instead.
 
 OpenJDK is the default because of licensing changes made upstream by
@@ -112,10 +112,18 @@ This recipe installs the 32-bit Java virtual machine without setting
 it as the default. This can be useful if you have applications on the
 same machine that require different versions of the JVM.
 
+package
+-------
+
+This recipe installs JDK from your yum/apt repository using the standard
+chef package resource. This options is useful if you do not give a fuck
+about Oracle's licensing and just want to use the package you have in your
+repo.
+
 windows
 -------
 
-Because there is no easy way to pull the java msi off oracle's site, 
+Because there is no easy way to pull the java msi off oracle's site,
 this recipe requires you to host it internally on your own http repo.
 
 Resources/Providers
